@@ -1,0 +1,15 @@
+%% 基本应用程序的应用程序资源文件（.app文件）
+{application, emqx_plugin_kafka,
+ [{description, "EMQ X Plugin kafka, Edit by WangMengQin"},
+  {vsn, "1.0.0"},
+  {modules, []},
+  {registered, [emqx_plugin_kafka_sup]},
+  {applications, [kernel,stdlib,brod,supervisor3]},
+  {mod, {emqx_plugin_kafka_app,[]}},
+  {env, []},
+  {licenses, ["Apache-2.0"]},
+  {maintainers, ["WangMengQin <441284713@qq.com>"]},
+  {links, [
+           {"GitHub", "https://github.com/emoQin/emqx-plugin-kafka"}
+          ]}
+ ]}.

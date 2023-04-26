@@ -1,0 +1,38 @@
+%%-*- mode: erlang -*-
+%% emqx plugin kafka 配置文件映射
+
+{mapping, "kafka.node_point_list", "emqx_plugin_kafka.config", [
+  {default, "127.0.0.1:9092"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.producer_write_async", "emqx_plugin_kafka.config", [
+  {default, true},
+  {datatype, {enum, [true, false]}}
+]}.
+
+{mapping, "kafka.reconnect_cool_down_seconds", "emqx_plugin_kafka.config", [
+  {default, 10},
+  {datatype, integer}
+]}.
+
+{mapping, "kafka.publish_topic", "emqx_plugin_kafka.config", [
+  {default, "emqx-topic"},
+  {datatype, string}
+]}.
+
+
+
+{translation, "emqx_plugin_kafka.config", fun(Conf) ->
+  NodePointList             = cuttlefish:conf_get("kafka.node_point_list"               , Conf),
+  ProducerWriteAsync        = cuttlefish:conf_get("kafka.producer_write_async"          , Conf),
+  ReconnectCoolDownSeconds  = cuttlefish:conf_get("kafka.reconnect_cool_down_seconds"   , Conf),
+  PublishTopic              = cuttlefish:conf_get("kafka.publish_topic"                 , Conf),
+  [
+    {nodePointList, NodePointList},
+    {producerWriteAsync, ProducerWriteAsync},
+    {reconnectCoolDownSeconds, ReconnectCoolDownSeconds},
+    {publishTopic, PublishTopic}
+  ]
+  end
+}.
